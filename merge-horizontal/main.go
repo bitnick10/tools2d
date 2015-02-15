@@ -6,6 +6,7 @@ import (
 	"image/png"
 	"os"
 	"path/filepath"
+	"strconv"
 )
 
 func get_filenames(extension string) []string {
@@ -37,11 +38,16 @@ func get_filenames(extension string) []string {
 func main() {
 	filenames := get_filenames(".png")
 
-	fmt.Printf("There are %d png files to be merge.\n", len(filenames))
+	fmt.Printf("There are %d png files will be merged.\n", len(filenames))
 	images := make([]image.Image, len(filenames))
 	for i, _ := range filenames {
 		n := i + 1
-		imageReader, err := os.Open(fmt.Sprintf("./ani_%d.png", n))
+		filename := fmt.Sprintf("ani_%d.png", n)
+		if _, err := os.Stat(filename); os.IsNotExist(err) {
+			fmt.Println("Can not find file", filename, "in this directory")
+			os.Exit(250)
+		}
+		imageReader, err := os.Open(filename)
 		check(err)
 		defer imageReader.Close()
 		images[i], err = png.Decode(imageReader)
@@ -59,6 +65,7 @@ func main() {
 				newImage.Set(x+img.Bounds().Dx()*i, y, img.At(x, y))
 			}
 		}
+		fmt.Println("ani_"+strconv.Itoa(i+1)+".png", "has been merged")
 	}
 
 	err = png.Encode(out, newImage)
