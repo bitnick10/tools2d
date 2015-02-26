@@ -64,9 +64,6 @@ func main() {
 			merge(fi.Name())
 		}
 	}
-	//merge("standing")
-	//fmt.Println(ss)
-	return
 
 	var a string
 	fmt.Scanln(&a)
