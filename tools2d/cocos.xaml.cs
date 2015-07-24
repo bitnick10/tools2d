@@ -26,7 +26,7 @@ namespace tools2d
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string cmdText = @"D:\cocos2d-x-3.5\tools\cocos2d-console\bin\cocos";
+            string cmdText = @"cocos2d-x-3.7\tools\cocos2d-console\bin\cocos";
             string args = "new " + projectName.Text + " -p " + "com.yourcompany." + projectName.Text + " -l cpp -d " + location.Text.Replace(@"\", "/");
             Process proc = Process.Start(cmdText, args);
         }
