@@ -31,5 +31,12 @@ namespace tools2d
             cocosWindow.Owner = this;
             cocosWindow.Show();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var sr = new ScreenshotResize();
+            sr.Owner = this;
+            sr.Show();
+        }
     }
 }

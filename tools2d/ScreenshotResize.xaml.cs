@@ -30,21 +30,38 @@ namespace tools2d
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true) {
+            if (openFileDialog.ShowDialog() == true)
+            {
                 Bitmap bitmap = new Bitmap(openFileDialog.FileName);
 
-                System.Drawing.Size size = new System.Drawing.Size(1242,2208);
-                Bitmap bitmap_1242x2208 = new Bitmap(bitmap, size);
-                bitmap_1242x2208.Save(openFileDialog.FileName.Substring(0, openFileDialog.FileName.Length - 4) + "-1242x2208.jpg", ImageFormat.Jpeg);
+                System.Drawing.Size size;
+                string filename;
 
-                System.Drawing.Size size2 = new System.Drawing.Size(640, 1136);
-                Bitmap bitmap_640x1136 = new Bitmap(bitmap, size2);
-                bitmap_640x1136.Save(openFileDialog.FileName.Substring(0, openFileDialog.FileName.Length - 4) + "-640x1136.jpg",ImageFormat.Jpeg);
+                if (bitmap.Width < bitmap.Height)
+                    size = new System.Drawing.Size(1242, 2208);
+                else
+                    size = new System.Drawing.Size(2208, 1242);
+                filename = openFileDialog.FileName.Substring(0, openFileDialog.FileName.Length - 4) + string.Format("-{0}x{1}.jpg",size.Width,size.Height);
+                ResizeImage(bitmap, size, filename);
 
-                System.Drawing.Size size3 = new System.Drawing.Size(750, 1334);
-                Bitmap bitmap_750x1334 = new Bitmap(bitmap, size3);
-                bitmap_750x1334.Save(openFileDialog.FileName.Substring(0, openFileDialog.FileName.Length - 4) + "-750x1334.jpg",ImageFormat.Jpeg);
+                if (bitmap.Width < bitmap.Height)
+                    size = new System.Drawing.Size(640, 1136);
+                else
+                    size = new System.Drawing.Size(1136, 640);
+                filename = openFileDialog.FileName.Substring(0, openFileDialog.FileName.Length - 4) + string.Format("-{0}x{1}.jpg", size.Width, size.Height);
+                ResizeImage(bitmap, size, filename);
+
+                if (bitmap.Width < bitmap.Height)
+                    size = new System.Drawing.Size(750, 1334);
+                else
+                    size = new System.Drawing.Size(1334, 750);
+                filename = openFileDialog.FileName.Substring(0, openFileDialog.FileName.Length - 4) + string.Format("-{0}x{1}.jpg", size.Width, size.Height);
+                ResizeImage(bitmap, size, filename);
             }
+        }
+        private void ResizeImage(Bitmap bitmap, System.Drawing.Size size,string filename) {
+            Bitmap newBitmap = new Bitmap(bitmap, size);
+            newBitmap.Save(filename, ImageFormat.Jpeg);
         }
     }
 }

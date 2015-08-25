@@ -4,6 +4,7 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Button Content="cocos" HorizontalAlignment="Left" Margin="22,29,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="ScreenshotResize" HorizontalAlignment="Left" Margin="22,66,0,0" VerticalAlignment="Top" Width="117" Click="Button_Click_1"/>
 
     </Grid>
 </Window>
